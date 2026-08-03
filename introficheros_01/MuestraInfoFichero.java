@@ -15,16 +15,29 @@ public class MuestraInfoFichero {
         if (fichero.isFile()){
             System.out.printf("El fichero %s es un fichero\n", ruta);
         } else if (fichero.isDirectory()){
-            System.out.printf("El fichero %s es un directorio que contien los ficheros siguientes:\n", ruta);
+            System.out.printf("El fichero %s es un directorio que contiene los ficheros siguientes:\n", ruta);
             //Como es un directorio, listo su contenido
             File[] ficheros = fichero.listFiles();
             for (File f : ficheros){
-                System.out.printf("  %s\n", f.getName());
-                if (f.isDirectory()){
-                    System.out.printf("/");
+                compruebaDirectorioYficheros(f);
                 }
-                System.out.printf("%s es un directorio\n", f.getName());
+            }
+        }
+
+        static void compruebaDirectorioYficheros(File fichero){
+            if (fichero.isDirectory()){
+                System.out.printf("El fichero %s es un directorio que contiene los ficheros siguientes:\n", fichero.getName());
+                //Como es un directorio, hay que listar su contenido
+                File[] ficheros = fichero.listFiles();
+                for (File f : ficheros){
+                    if (f.isDirectory()){
+                        System.out.printf("/");
+                        compruebaDirectorioYficheros(f);
+                    }
+                    System.out.printf("%s\n", f.getName());
                 }
+            }else{ //Es sólo un fichero
+                System.out.printf("%s\n", fichero.getName());
             }
         }
     }
