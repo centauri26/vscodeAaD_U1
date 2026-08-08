@@ -1,0 +1,15 @@
+# Fichero de Configuracion de la Aplicacion
+# Entorno de Ejecucion
+app.env=development
+app.version=1.0.0
+
+# Configuracion de Base de Datos
+db.host=localhost
+db.port=3306
+db.name=mi_base_datos
+db.user=root
+db.password=secret123
+
+# Servidor Web
+server.port=8080
+server.timeout=3000
