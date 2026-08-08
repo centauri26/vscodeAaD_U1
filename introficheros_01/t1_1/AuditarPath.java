@@ -15,8 +15,10 @@ import java.util.Set;
 public class AuditarPath {
     /*
      * REQUISITO 1:
-     * Es interesante conocer el package java.time.format, 
-     * que nos permite formatear fechas y horas de manera flexible.
+     * Es interesante conocer el package java.time.format que permite 
+     * formatear fechas y horas con formatos a medida.
+     * En esta taera, se requiere formatear la fecha de última modificación 
+     * de los ficheros y directorios y para ello se pide emplear DateTimeFormatter.ofPattern()
      */
     private static final DateTimeFormatter FORMATO_FECHA = 
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -30,13 +32,13 @@ public class AuditarPath {
         String rutaStr = args.length > 0 ? args[0] : ".";
         Path ruta = Path.of(rutaStr);
 
-        // REQUISITO 4: Compruebo si la ruta existe antes de auditarla
+        // REQUISITO 3: Compruebo si la ruta existe antes de auditarla
         if (Files.notExists(ruta)) {
             System.err.printf("Error: La ruta '%s' no existe.%n", rutaStr);
             return;
         }
         /*
-         * REQUISITO 3: 
+         * REQUISITO 4: 
          * Utilizar toAbsolutePath() paramostrar la ruta completa en la auditoría.
          * Si el path ya es completo(absoluto) no cambia nada, pero si es relativo,
          * consigue mostrar la ruta completa.
@@ -78,7 +80,7 @@ public class AuditarPath {
      */
     private static void pintarInfoAuditoria(Path path) {
         try {
-            //REQUISITO 9: Leer todos los atributos básicos del fichero de la forma máseficiente
+            //REQUISITO 9: Leer todos los atributos básicos del fichero de la forma más eficiente
             BasicFileAttributes attrs = Files.readAttributes(path, BasicFileAttributes.class);
 
             //REQUISITO 10: Componer y formatear el nombre del fichero o directorio
@@ -100,7 +102,7 @@ public class AuditarPath {
             );
             String fechaFormateada = fechaModificacion.format(FORMATO_FECHA);
 
-            //REQUISITO 14: Formateo en tabla para presentar la información de forma limpia en la consola
+            //REQUISITO 14: Formateo en tabla(columnas separadas por |) para presentar la información de forma limpia en la consola
             System.out.printf("%-10s | %-19s | %12d bytes | %s%n", 
                     permisos, fechaFormateada, tamanio, nombre);
 
@@ -113,14 +115,14 @@ public class AuditarPath {
      * REQUISITO 15: 
      * Implementar un método "obtenerPermisosRWX" que debe ser privado y estático
      * y que devuelve los permisos en formato rwx.
-     * Debe soportar en el PASO 1: la lectura POSIX (Linux/macOS) y en el PASO 2: fallback para Windows.
+     * Debe soportar en un PASO 1: la lectura POSIX (Linux/macOS) y en un PASO 2: fallback para Windows.
      */
     private static String obtenerPermisosRWX(Path path) {
         try {//PASO 1: Intentar leer permisos estilo POSIX (Linux, macOS, Unix)
             Set<PosixFilePermission> posixPermissions = Files.getPosixFilePermissions(path);
             return PosixFilePermissions.toString(posixPermissions);
         } catch (UnsupportedOperationException e) {
-            //PASO 2: Fallback para Windows(Sistemas de archivos sin POSIX como NTFS/FAT32)
+            //PASO 2: Alternativa para Windows(Sistemas de archivos sin POSIX como NTFS/FAT32)
             char r = Files.isReadable(path) ? 'r' : '-';
             char w = Files.isWritable(path) ? 'w' : '-';
             char x = Files.isExecutable(path) ? 'x' : '-';
