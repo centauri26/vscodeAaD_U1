@@ -1,8 +1,8 @@
-package objects_06;
+
 
 import java.io.*;
 
-public class PersistenciaNativaDemo {
+public class PersistenciaTradicionalApp{
 
     public static void main(String[] args) {
         File archivo = new File("usuario.bin");
