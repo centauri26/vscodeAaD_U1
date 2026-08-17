@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Path;
 
-public class CopiarByteAByte {
+public class CopiarByteaByte {
 
     public static void copiarFichero(Path origen, Path destino) {
         System.out.println("Iniciando copia de: " + origen.getFileName() + " -> " + destino.getFileName());
