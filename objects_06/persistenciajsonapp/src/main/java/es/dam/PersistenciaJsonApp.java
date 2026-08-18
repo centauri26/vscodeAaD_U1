@@ -13,7 +13,7 @@ public class PersistenciaJsonApp {
 
         /*
          * REQUISITO 1 DE ESCRITURA: 
-         *Guardar objeto como JSON en archivo
+         * Guardar objeto como JSON en archivo
          */
         try {//REQUISITO 2 try-catch-with-resources
             mapper.writerWithDefaultPrettyPrinter().writeValue(archivo, usuarioOriginal);
@@ -24,7 +24,7 @@ public class PersistenciaJsonApp {
 
         /*
          * REQUISITO 3 DE LECTURA: 
-         *Recuperar objeto desde archivo JSON
+         * Recuperar objeto desde archivo JSON
          */
         try {//REQUISITO 2 try-catch-with-resources
             Usuario usuarioLeido = mapper.readValue(archivo, Usuario.class);
