@@ -1,7 +1,7 @@
 package es.dam;
 
-import com.google.code.gson.Gson;
-import com.google.code.gson.GsonBuilder;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.FileWriter;
 import java.io.IOException;
 

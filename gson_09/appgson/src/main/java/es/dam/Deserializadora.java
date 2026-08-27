@@ -1,6 +1,6 @@
 package es.dam;
 
-import com.google.code.gson.Gson;
+import com.google.gson.Gson;
 import java.io.FileReader;
 import java.io.IOException;
 
